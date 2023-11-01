@@ -12,47 +12,47 @@ Create a file called `./github/workflows/run-pylint.yml`, and put the following 
 
 name: Pylint
 
-  on:
-    workflow_dispatch:
-    push:
-      branches:
-        - main
-    pull_request:
-  
-  jobs:
-    build:
-      runs-on: ubuntu-latest
-      strategy:
-        matrix:
-          python-version: ["3.11"] # Or whatever version of Python your code uses
-      steps:
-        - uses: actions/checkout@v3
-        - name: Set up Python ${{ matrix.python-version }}
-          uses: actions/setup-python@v3
-          with:
-            python-version: ${{ matrix.python-version }}
-        - name: Install dependencies
-          run: |
-            python -m pip install --upgrade pip
-            pip install pylint anybadge
-        - name: Run Pylint and create badge
-          run: |
-            pylint $(git ls-files '*.py') --output pylint.log --exit-zero
-        - name: Get Pylint score and create badge
-          run: |
-            PYLINT_SCORE=$(sed -n 's/^Your code has been rated at \([-0-9.]*\)\/.*/\1/p' pylint.log)
-            echo $PYLINT_SCORE
-            anybadge -l pylint --value=$PYLINT_SCORE -f <YOUR REPO>-pylint-badge.svg 2=red 4=orange 8=yellow 10=green
-        - name: Push badge to badges repo
-          uses: dmnemec/copy_file_to_another_repo_action@main
-          env:
-            API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
-          with:
-            source_file: "<YOUR REPO>-pylint-badge.svg"
-            destination_repo: "nlp-tlp/badges"
-            user_email: "github-actions[bot]@users.noreply.github.com"
-            user_name: "github-actions[bot]"
-            commit_message: "Update <YOUR REPO> Pylint badge"
+    on:
+      workflow_dispatch:
+      push:
+        branches:
+          - main
+      pull_request:
+    
+    jobs:
+      build:
+        runs-on: ubuntu-latest
+        strategy:
+          matrix:
+            python-version: ["3.11"] # Or whatever version of Python your code uses
+        steps:
+          - uses: actions/checkout@v3
+          - name: Set up Python ${{ matrix.python-version }}
+            uses: actions/setup-python@v3
+            with:
+              python-version: ${{ matrix.python-version }}
+          - name: Install dependencies
+            run: |
+              python -m pip install --upgrade pip
+              pip install pylint anybadge
+          - name: Run Pylint and create badge
+            run: |
+              pylint $(git ls-files '*.py') --output pylint.log --exit-zero
+          - name: Get Pylint score and create badge
+            run: |
+              PYLINT_SCORE=$(sed -n 's/^Your code has been rated at \([-0-9.]*\)\/.*/\1/p' pylint.log)
+              echo $PYLINT_SCORE
+              anybadge -l pylint --value=$PYLINT_SCORE -f <YOUR REPO>-pylint-badge.svg 2=red 4=orange 8=yellow 10=green
+          - name: Push badge to badges repo
+            uses: dmnemec/copy_file_to_another_repo_action@main
+            env:
+              API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+            with:
+              source_file: "<YOUR REPO>-pylint-badge.svg"
+              destination_repo: "nlp-tlp/badges"
+              user_email: "github-actions[bot]@users.noreply.github.com"
+              user_name: "github-actions[bot]"
+              commit_message: "Update <YOUR REPO> Pylint badge"
 
 This will create a GitHub action that runs Pylint, creates a corresponding badge, then pushes it to this repository.
 

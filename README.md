@@ -4,6 +4,8 @@ This is a repo for storing badges that we can link to in our README files.
 
 ## How can I add a badge to my repo?
 
+This repo provides instructions for how to create a badge to put on your repo's README, like this: [![Pylint Status](https://github.com/nlp-tlp/badges/blob/main/puggle-pylint-badge.svg)](https://github.com/nlp-tlp/puggle/actions/workflows/run-pylint.yml)
+
 You can create lots of different badges, but so far I've only experimented with Pylint, so this guide will focus on that. You can adapt this to other badges though!
 
 ### 1. Create a workflow

@@ -10,7 +10,7 @@ You can create lots of different badges, but so far I've only experimented with 
 
 Create a file called `./github/workflows/run-pylint.yml`, and put the following inside (being sure to replace `<YOUR REPO>` with the name of your project, such as "puggle":
 
-name: Pylint
+    name: Pylint
 
     on:
       workflow_dispatch:

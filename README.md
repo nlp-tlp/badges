@@ -92,3 +92,21 @@ In your readme file, paste the following (replace `<YOUR REPO>` with the name of
 ... and then next time you push to main, you should have a nice Pylint badge!
 
 If you have any issues with the above, please let me (Michael) know.
+
+## Other badges you can add
+
+You can also set up a GitHub action to run your unit tests - see the [run-tests.yml](https://github.com/nlp-tlp/puggle/blob/main/.github/workflows/run-tests.yml) action in the Puggle repo for example.
+
+Adding a badge to show that your tests pass is pretty straightforward, as GitHub stores an svg of a badge with the status of that action. You can add it to your README like this:
+
+    [![Pytest Status](https://github.com/nlp-tlp/<YOUR REPO>/actions/workflows/run-tests.yml/badge.svg)](https://github.com/nlp-tlp/<YOUR REPO>/actions/workflows/run-tests.yml)
+
+Another useful badge is for your unit test coverage. In the `run-tests` action above, I've used [Coveralls](https://coveralls.io) to track the coverage history. The Coveralls website provides me with a link to the badge, which you can add to your repo:
+
+    [![Coverage Status](https://coveralls.io/repos/github/nlp-tlp/<YOUR REPO>/badge.svg?branch=main)](https://coveralls.io/github/nlp-tlp/<YOUR REPO>?branch=main)
+
+You may need to create an account with Coveralls to get this to work, but I'm not 100% sure.
+
+## Other options to look into
+
+[Shields](https://shields.io/) looks good, but I haven't tried it yet. Might be better than Coveralls for the test coverage badge - feel free to give it a go if you like, and let me know how it goes.
